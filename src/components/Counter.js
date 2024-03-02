@@ -33,8 +33,3 @@ export default class Counter extends React.Component {
     }
 }
 
-ReactDOM.render(
-    React.createElement(Counter),
-    document.getElementById('root')
-)
-

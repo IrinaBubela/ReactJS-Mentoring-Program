@@ -18,14 +18,14 @@ export const SearchForm = ({initialQuery, onSearch}) => {
     };
 
     return (
-        <div>
+        <form>
             <input
                 type="text"
                 value={query}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress} />
             <button onClick={handleSearch}>Search</button>
-        </div>
+        </form>
     );
 };
 
