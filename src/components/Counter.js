@@ -1,5 +1,4 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
 
 export default class Counter extends React.Component {
     constructor(props) {
@@ -26,7 +25,7 @@ export default class Counter extends React.Component {
 
     render(){
         return React.createElement('div', null,
-            React.createElement('p', null, `Count: ${ this.state.value }`),
+            React.createElement('p', {'data-testid': 'count-display'}, `Count: ${ this.state.value }`),
             React.createElement('button', { onClick: this.increment }, 'Increment'),
             React.createElement('button', { onClick: this.decrement }, 'Decrement'),
         )
