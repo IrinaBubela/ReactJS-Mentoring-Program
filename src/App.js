@@ -20,7 +20,8 @@ function App() {
 
   return (
     <div className="App">
-      <div><Counter initialValue={0}/></div>
+    <div>
+      <Counter initialValue={0}/></div>
       <hr></hr>
       <div><SearchForm initialQuery="" onSearch={handleSearch} /></div>
       <hr></hr>
