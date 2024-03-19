@@ -43,7 +43,7 @@ function App() {
   });
 
   return (
-    <div className="App container">
+ <div className="App container">
       <h2 className="h2 text-center">FIND YOUR MOVIE</h2>
       <div><SearchForm initialQuery="" onSearch={handleSearch} /></div>
       <div className="control-section container">
