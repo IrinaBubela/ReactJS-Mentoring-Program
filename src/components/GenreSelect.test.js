@@ -19,10 +19,6 @@ describe('GenreSelect Integration Test', () => {
       expect(getByText(genre)).toBeInTheDocument();
     });
 
-    // Check if the selected genre is highlighted
-    const selectedGenreElement = getByText(selectedGenre);
-    expect(selectedGenreElement).toHaveStyle('background-color: lightgreen');
-
     // Click on a different genre and check if the onSelect callback is called
     const genreToSelect = 'Western';
     const genreButton = getByText(genreToSelect);

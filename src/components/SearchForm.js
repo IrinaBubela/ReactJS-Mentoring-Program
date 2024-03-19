@@ -17,15 +17,29 @@ export const SearchForm = ({initialQuery, onSearch}) => {
         }
     };
 
+    const handleSubmit= (event) => {
+        console.log('handleSubmit', event);
+    };
+
     return (
-        <form>
-            <input
-                type="text"
-                value={query}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyPress} />
-            <button onClick={handleSearch}>Search</button>
-        </form>
+        <div className="search-form container">
+            <form onSubmit={handleSubmit}>
+                <div className="input-group mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    value={query}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyPress} />
+                <div className="input-group-append">
+                    <button className="btn btn-outline-danger btn-lg" onClick={handleSearch} type="submit">Search</button>
+                </div>
+                </div>
+            </form>
+        </div>
     );
 };
 

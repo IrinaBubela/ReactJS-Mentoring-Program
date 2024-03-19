@@ -2,12 +2,12 @@ import React from 'react';
 
 const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
   return (
-    <div>
+    <div className="btn-group">
       {genres.map((genre) => (
         <button
           key={genre}
           onClick={() => onSelect(genre)}
-          style={{ backgroundColor: genre === selectedGenre ? 'lightgreen' : 'white' }}>
+          className={`btn ${genre === selectedGenre ? 'btn-danger' : 'btn-light'}`}>
           {genre}
         </button>
       ))}
