@@ -1,45 +1,12 @@
 import './App.css';
-import {useState} from 'react';
+import { useState, useMemo } from 'react';
 import SearchForm from './components/SearchForm';
 import GenreSelect from './components/GenreSelect';
 import MovieTitle from './components/MovieTitle';
 import MovieDetails from './components/MovieDetails';
 import SortControl from './components/SortControl';
-import Image1 from './img/image1.jpg';
-import Image2 from './img/image2.jpg';
-import Image3 from './img/image3.jpg';
-
-const movies = [
-  {
-    imageUrl: Image1,
-    name: 'Movie 1',
-    releaseYear: 2021,
-    genres: ['Action', 'Adventure'],
-    rating: '7',
-    duration: '2h',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  },
-  {
-    imageUrl: Image2,
-    name: 'Movie 2',
-    releaseYear: 2023,
-    genres: ['Comedy', 'Romance'],
-    rating: '4',
-    duration: '2h 30min',
-    description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    imageUrl: Image3,
-    name: 'Movie 3',
-    releaseYear: 2022,
-    genres: ['Drama'],
-    rating: '10',
-    duration: '1h 45min',
-    description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  }
-];
-
-const genres = ['Action', 'Drama',  'Adventure', 'Comedy', 'Horror'];
+import movies from './movies.json';
+import genres from './genres.json';
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState('');
@@ -64,13 +31,15 @@ function App() {
     setSelectedMovie(movie);
   };
 
-  const sortedMovies = movies.slice().sort((a, b) => {
-    if (currentSort === 'releaseDate') {
-      return a.releaseYear - b.releaseYear;
-    } else if (currentSort === 'title') {
-      return a.name.localeCompare(b.name);
-    }
-    return 0;
+  const sortedMovies = useMemo(() => {
+    return movies.slice().sort((a, b) => {
+      if (currentSort === 'releaseDate') {
+        return a.releaseYear - b.releaseYear;
+      } else if (currentSort === 'title') {
+        return a.name.localeCompare(b.name);
+      }
+      return 0;
+    });
   });
 
   return (
@@ -78,13 +47,13 @@ function App() {
       <h2 className="h2 text-center">FIND YOUR MOVIE</h2>
       <div><SearchForm initialQuery="" onSearch={handleSearch} /></div>
       <div className="control-section container">
-        <GenreSelect 
+        <GenreSelect
           genres={genres}
           selectedGenre={selectedGenre}
-          onSelect={handleGenreSelect} // Change onSelect to handleGenreSelect
+          onSelect={handleGenreSelect} 
         />
-        <SortControl 
-          currentSelection={currentSort} 
+        <SortControl
+          currentSelection={currentSort}
           onSortChange={handleSortChange}
         />
       </div>
@@ -93,8 +62,8 @@ function App() {
           {sortedMovies
             .filter(movie => !selectedGenre || movie.genres.includes(selectedGenre))
             .map((movie, index) => (
-              <MovieTitle movie={movie} key={index} onClick={handleMovieClick}/>
-          ))}
+              <MovieTitle movie={movie} key={index} onClick={handleMovieClick} />
+            ))}
         </div>
       </div>
       {selectedMovie && <MovieDetails movie={selectedMovie} />}
