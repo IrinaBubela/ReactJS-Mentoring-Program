@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 export const SearchForm = ({initialQuery, onSearch}) => {
     const [query, setQuery] = useState(initialQuery);
