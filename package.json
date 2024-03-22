@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
+    "focus-trap-react": "^10.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -14,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!my-library-dir)/'",
     "dev": "vite --host",
     "eject": "react-scripts eject",
     "wdio": "wdio run ./wdio.conf.js",
@@ -40,8 +41,11 @@
       "last 1 safari version"
     ]
   },
+  "main": "dist/index",
+  "types": "dist/index",
   "devDependencies": {
     "@babel/register": "^7.23.7",
+    "@chromatic-com/storybook": "^1.2.22",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
@@ -52,6 +56,9 @@
     "@storybook/react-webpack5": "^7.6.17",
     "@storybook/test": "^7.6.17",
     "@testing-library/react": "^14.2.1",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
     "@wdio/cli": "^8.32.3",
     "@wdio/jasmine-framework": "^8.32.3",
     "@wdio/local-runner": "^8.32.3",
@@ -61,6 +68,7 @@
     "jest": "^27.5.1",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.17",
+    "typescript": "^5.4.3",
     "webpack": "^5.90.3"
   }
 }

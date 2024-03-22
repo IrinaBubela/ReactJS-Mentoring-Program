@@ -7,7 +7,8 @@ const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
         <button
           key={genre}
           onClick={() => onSelect(genre)}
-          className={`btn ${genre === selectedGenre ? 'btn-danger' : 'btn-light'}`}>
+          className={`btn ${genre === selectedGenre ? 'btn-danger' : 'btn-light'}`}
+        >
           {genre}
         </button>
       ))}

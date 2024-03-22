@@ -11,7 +11,7 @@ const SortControl = ({ currentSelection, onSortChange }) => {
     <div className="sort-control form-group">
       <label htmlFor="sort-by">Sort by:</label>
       <select className="form-control" id="sort-by" value={currentSelection} onChange={handleSortChange}>
-        <option value="releaseDate">Release Date</option>
+        <option value="releaseDate">Release Year</option>
         <option value="title">Title</option>
       </select>
     </div>

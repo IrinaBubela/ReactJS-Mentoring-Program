@@ -1,5 +1,3 @@
-import React from 'react';
-import { Story } from '@storybook/react';
 import MovieDetails from '../components/MovieDetails';
 
 export default {
@@ -15,7 +13,7 @@ export default {
 }; 
 
 // Define a template for the component story
-const Template: Story = (args) => <MovieDetails {...args} />;
+const Template = (args) => <MovieDetails {...args} />;
 
 // Define a default story
 export const Default = Template.bind({});
@@ -23,7 +21,7 @@ Default.args = {
   movie: {
     name: 'Interstellar',
     imageUrl: 'https://example.com/interstellar-poster.jpg',
-    releaseYear: 2014,
+    releaseYear: '2014',
     rating: 8.6,
     duration: '2h 49min',
     description: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',

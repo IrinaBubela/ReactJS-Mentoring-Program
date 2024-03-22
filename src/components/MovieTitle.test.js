@@ -7,7 +7,7 @@ const movie = {
   imageUrl: 'example.jpg',
   name: 'Example Movie',
   genres: ['Action', 'Adventure'],
-  releaseYear: 2021
+  releaseYear: '2021',
 };
 
 describe('MovieTitle', () => {
