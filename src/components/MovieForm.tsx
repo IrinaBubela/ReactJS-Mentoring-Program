@@ -1,22 +1,32 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { initialMovieInfoObject } from '../App';
 
-const MovieForm = ({ initialMovieInfo, onSubmit }) => {
-  const [movieInfo, setMovieInfo] = useState(initialMovieInfo);
+interface MovieInfo {
+  title: string;
+  releaseYear: string;
+  imageUrl: string;
+  rating: string;
+  genres: string[];
+  duration: string;
+  overview: string;
+}
 
-  const handleChange = (e) => {
+interface MovieFormProps {
+  initialMovieInfo?: MovieInfo;
+  onSubmit: (formData: MovieInfo) => void;
+}
+
+const MovieForm: React.FC<MovieFormProps> = ({ initialMovieInfo, onSubmit }) => {
+  const [movieInfo, setMovieInfo] = useState<MovieInfo>(initialMovieInfo || initialMovieInfoObject);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setMovieInfo({ ...movieInfo, [name]: value });
   };
 
-  const handleSubmit = (event) => {
-    const formData = Object.fromEntries(new FormData(event.target));
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(formData);
-  };
-
-  const resetDialog = () => {
-    setMovieInfo(initialMovieInfoObject);
+    onSubmit(movieInfo);
   };
 
   return (
@@ -54,14 +64,13 @@ const MovieForm = ({ initialMovieInfo, onSubmit }) => {
           <textarea className="form-control" id="overview" name="overview" value={movieInfo.overview} onChange={handleChange}></textarea>
         </div>
       </div>
-
       <div className="modal-footer">
         <div className="text-end mt-3">
-          <button type="button" onClick={resetDialog} className="btn btn-primary">Reset</button>
-        </div> 
+          <button type="button" className="btn btn-primary">Reset</button>
+        </div>
         <div className="text-end mt-3">
           <button type="submit" className="btn btn-primary">Submit</button>
-        </div> 
+        </div>
       </div>
     </form>
   );

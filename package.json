@@ -9,6 +9,7 @@
     "focus-trap-react": "^10.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-portal": "^4.2.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -59,6 +60,7 @@
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
+    "@types/react-portal": "^4.0.7",
     "@wdio/cli": "^8.32.3",
     "@wdio/jasmine-framework": "^8.32.3",
     "@wdio/local-runner": "^8.32.3",
@@ -68,7 +70,7 @@
     "jest": "^27.5.1",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.17",
-    "typescript": "^5.4.3",
+    "typescript": "^3.9.10",
     "webpack": "^5.90.3"
   }
 }

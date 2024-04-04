@@ -8,6 +8,7 @@ import SearchForm from './components/SearchForm.js';
 import Dialog from './components/Dialog.tsx';
 import moviesList from './movies.json';
 import genres from './genres.json';
+import MovieForm from './components/MovieForm.tsx';
 
 export interface InitialMovieInfoInterface {
   title: string;
@@ -136,8 +137,28 @@ const App: FC = () => {
             ))}
         </div>
       </div>
-      {showAddDialog && <Dialog title="Add movie" initialMovieInfo={initialMovieInfoObject} onSubmitDialog={onSubmitMovieForm} onCloseDialog={onCloseMovieAddForm} />}
-      {showEditDialog && <Dialog title="Edit movie" initialMovieInfo={editDialogData || initialMovieInfoObject} onSubmitDialog={onSubmitMovieForm} onCloseDialog={onCloseMovieEditForm} />}
+      {showAddDialog &&
+        <Dialog
+          title="Add movie"
+          onCloseDialog={onCloseMovieAddForm}
+        >
+          <MovieForm
+            onSubmit={onSubmitMovieForm}
+            initialMovieInfo={initialMovieInfoObject}
+          />
+        </Dialog>
+      }
+      {showEditDialog &&
+        <Dialog
+          title="Edit movie"
+          onCloseDialog={onCloseMovieEditForm}
+        >
+          <MovieForm
+            onSubmit={onSubmitMovieForm}
+            initialMovieInfo={editDialogData || initialMovieInfoObject}
+          />
+        </Dialog>
+      }
       {selectedMovie && <MovieDetails movie={selectedMovie} />}
     </div>
   );
