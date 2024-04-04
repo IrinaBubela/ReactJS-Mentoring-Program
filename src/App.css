@@ -76,3 +76,49 @@
 .movie-details img{
   width: 95%;
 }
+
+.modal {
+  display: block !important;
+}
+
+.form-actions {
+  width: 100%;
+}
+
+.form-actions-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-reset {
+  margin-right: 12px;
+}
+
+.container-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-modal > .modal {
+  display: block !important;
+}
+
+.edit-movie {
+  position: relative;
+
+}
+
+.edit-movie .btns{
+  position: absolute;
+  left: 60%;
+  top: 25%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: none;
+  text-align: right;
+}
+
+.edit-movie:hover .btns {
+  display: block;
+}

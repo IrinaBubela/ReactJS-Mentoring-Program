@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import MovieDetails from './MovieDetails';
 
@@ -6,8 +5,8 @@ import MovieDetails from './MovieDetails';
 const movie = {
   imageUrl: 'example.jpg',
   name: 'Example Movie',
-  releaseYear: 2021,
-  rating: 'PG-13',
+  releaseYear: '2021',
+  rating: '10',
   duration: '2h',
   description: 'This is an example movie description.'
 };

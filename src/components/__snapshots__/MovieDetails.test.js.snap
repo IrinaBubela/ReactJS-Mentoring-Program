@@ -41,7 +41,7 @@ exports[`MovieDetails renders correctly 1`] = `
               Rating:
             </strong>
              
-            PG-13
+            10
           </p>
           <p>
             <strong>
