@@ -10,9 +10,13 @@ interface DialogProps {
 
 const Dialog: React.FC<PropsWithChildren<DialogProps>> = ({ title, onCloseDialog, children }) => {
 
-
   return createPortal(
-    <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+    <FocusTrap focusTrapOptions={{
+      clickOutsideDeactivates: true,
+      tabbableOptions: {
+        displayCheck: 'none'
+      }
+    }}>
       <div className="modal" style={{ display: 'block' }} role="dialog" onClick={() => onCloseDialog()}>
         <div className="modal-dialog" role="document" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">

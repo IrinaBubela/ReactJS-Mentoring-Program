@@ -1,32 +1,21 @@
-import { render, fireEvent } from '@testing-library/react';
-import Dialog from './Dialog';
+import { fireEvent, render } from '@testing-library/react';
+import Dialog from './Dialog.tsx'; 
 
 describe('Dialog Component', () => {
-  const initialMovieInfo = {
-    title: '',
-    releaseYear: '',
-    imageUrl: '',
-    rating: '',
-    genres: [],
-    duration: '',
-    overview: ''
-  };
 
   it('renders dialog with title and close button', () => {
-    const title = 'Test Dialog Title';
     const onCloseDialog = jest.fn();
-
     const { getByText } = render(
-      <Dialog
-        title={title}
-        initialMovieInfo={initialMovieInfo}
-        onSubmitDialog={() => {}}
-        onCloseDialog={onCloseDialog}
-      />
+      
+      <Dialog title="Dialog Title" onCloseDialog={onCloseDialog}>
+        <div>Dialog Child</div>
+      </Dialog>
     );
 
-    expect(getByText(title)).toBeInTheDocument();
-    fireEvent.click(getByText('X')); // Close the dialog
+    expect(getByText('Dialog Title')).toBeInTheDocument();
+    expect(getByText('Dialog Child')).toBeInTheDocument();
+
+    fireEvent.click(getByText('X')); 
     expect(onCloseDialog).toHaveBeenCalled();
   });
 });
