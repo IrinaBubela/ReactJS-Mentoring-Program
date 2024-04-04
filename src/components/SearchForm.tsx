@@ -1,24 +1,30 @@
-import {useState} from 'react';
+import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 
-export const SearchForm = ({initialQuery, onSearch}) => {
-    const [query, setQuery] = useState(initialQuery);
+interface Props {
+    initialQuery: string;
+    onSearch: (query: string) => void;
+}
 
-    const handleInputChange = (event) => {
+const SearchForm: React.FC<Props> = ({ initialQuery, onSearch }) => {
+    const [query, setQuery] = useState<string>(initialQuery);
+
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
     };
 
-    const handleSearch = () => {
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
         onSearch(query);
     };
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
           onSearch(query);
         }
     };
 
-    const handleSubmit= (event) => {
-        console.log('handleSubmit', event);
+    const handleSubmit= (event: React.FormEvent) => {
+        event.preventDefault();
     };
 
     return (

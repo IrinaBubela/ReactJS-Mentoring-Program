@@ -25,6 +25,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  max-width: 60%;
+  min-height: 160px;
+}
+
+.name-and-genre p {
+  line-break: anywhere;
 }
 
 .movie-details-container .details .year{
@@ -73,7 +79,7 @@
   width: 100%;
 }
 
-.movie-details img{
+.movie-details > img{
   width: 95%;
 }
 
@@ -121,4 +127,10 @@
 
 .edit-movie:hover .btns {
   display: block;
+}
+
+.poster img {
+  width: 90%;
+  height: 90%;
+  min-height: 250px;
 }

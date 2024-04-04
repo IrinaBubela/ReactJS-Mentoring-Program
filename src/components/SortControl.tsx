@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-const SortControl = ({ currentSelection, onSortChange }) => {
+interface Props {
+    currentSelection: string;
+    onSortChange: (selectedOption: string) => void;
+}
+
+const SortControl: React.FC<Props> = ({ currentSelection, onSortChange }) => {
   
-  const handleSortChange = (event) => {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = event.target.value;
     onSortChange(selectedOption); 
   };
