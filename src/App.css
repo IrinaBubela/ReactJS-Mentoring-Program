@@ -77,6 +77,10 @@
   width: 95%;
 }
 
+.modal {
+  display: block !important;
+}
+
 .container-modal {
   display: flex;
   justify-content: center;

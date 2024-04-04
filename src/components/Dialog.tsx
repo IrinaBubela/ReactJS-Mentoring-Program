@@ -17,7 +17,7 @@ const Dialog: React.FC<PropsWithChildren<DialogProps>> = ({ title, onCloseDialog
         displayCheck: 'none'
       }
     }}>
-      <div className="modal" style={{ display: 'block' }} role="dialog" onClick={() => onCloseDialog()}>
+      <div className="modal" role="dialog" onClick={() => onCloseDialog()}>
         <div className="modal-dialog" role="document" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">
             <div className="modal-header d-flex justify-content-between">
