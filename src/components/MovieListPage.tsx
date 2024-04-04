@@ -97,10 +97,6 @@ const MovieListPage: React.FC = () => {
         setSelectedMovie(movie);
     };
 
-    const handleSearchBy = (criteria: string) => {
-        setSearchBy(criteria);
-    }
-
     const onSubmitMovieForm = (form: Movie) => {
         console.log(form, 'form');
     };
@@ -132,7 +128,7 @@ const MovieListPage: React.FC = () => {
                             .map(criteria => (
                                 <button
                                     key={criteria}
-                                    onClick={() => handleSearchBy(criteria)}
+                                    onClick={() => setSearchBy(criteria)}
                                     className={`btn btn-sm ${criteria === searchBy ? 'btn-danger' : 'btn-light'}`}>
                                     Search for {criteria}
                                 </button>
