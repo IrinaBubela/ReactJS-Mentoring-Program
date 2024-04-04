@@ -64,12 +64,14 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovieInfo, onSubmit }) => 
           <textarea className="form-control" id="overview" name="overview" value={movieInfo.overview} onChange={handleChange}></textarea>
         </div>
       </div>
-      <div className="modal-footer">
-        <div className="text-end mt-3">
-          <button type="button" className="btn btn-primary">Reset</button>
-        </div>
-        <div className="text-end mt-3">
-          <button type="submit" className="btn btn-primary">Submit</button>
+      <div className="form-actions">
+        <div className="form-actions-btns">
+          <div className="text-end mt-3">
+            <button type="button" className="btn btn-gray btn-secondary btn-reset">Reset</button>
+          </div>
+          <div className="text-end mt-3">
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </div>
         </div>
       </div>
     </form>

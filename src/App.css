@@ -81,6 +81,19 @@
   display: block !important;
 }
 
+.form-actions {
+  width: 100%;
+}
+
+.form-actions-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-reset {
+  margin-right: 12px;
+}
+
 .container-modal {
   display: flex;
   justify-content: center;
