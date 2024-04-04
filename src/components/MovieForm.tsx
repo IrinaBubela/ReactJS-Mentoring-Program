@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
-import { initialMovieInfoObject } from '../App';
-
-interface MovieInfo {
-  title: string;
-  releaseYear: string;
-  imageUrl: string;
-  rating: string;
-  genres: string[];
-  duration: string;
-  overview: string;
-}
+import { Movie, initialMovieInfoObject } from './MovieListPage';
 
 interface MovieFormProps {
-  initialMovieInfo?: MovieInfo;
-  onSubmit: (formData: MovieInfo) => void;
+  initialMovieInfo?: Movie;
+  onSubmit: (formData: Movie) => void;
 }
 
 const MovieForm: React.FC<MovieFormProps> = ({ initialMovieInfo, onSubmit }) => {
-  const [movieInfo, setMovieInfo] = useState<MovieInfo>(initialMovieInfo || initialMovieInfoObject);
+  const [movieInfo, setMovieInfo] = useState<Movie>(initialMovieInfo || initialMovieInfoObject);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -38,16 +28,16 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovieInfo, onSubmit }) => 
         </div>
         <div className="col-4">
           <label htmlFor="releaseYear" className="form-label">Release Year</label>
-          <input type="text" className="form-control" id="releaseYear" name="releaseYear" value={movieInfo.releaseYear} onChange={handleChange} />
+          <input type="text" className="form-control" id="releaseYear" name="releaseYear" value={movieInfo.release_date} onChange={handleChange} />
         </div>
 
         <div className="col-8">
           <label htmlFor="imageUrl" className="form-label">Movie URL</label>
-          <input type="text" className="form-control" id="imageUrl" name="imageUrl" value={movieInfo.imageUrl} onChange={handleChange} />
+          <input type="text" className="form-control" id="imageUrl" name="imageUrl" value={movieInfo.poster_path} onChange={handleChange} />
         </div>
         <div className="col-4">
           <label htmlFor="rating" className="form-label">Rating</label>
-          <input type="text" className="form-control" id="rating" name="rating" value={movieInfo.rating} onChange={handleChange} />
+          <input type="text" className="form-control" id="rating" name="rating" value={movieInfo.overview} onChange={handleChange} />
         </div>
 
         <div className="col-8">
@@ -56,7 +46,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovieInfo, onSubmit }) => 
         </div>
         <div className="col-4">
           <label htmlFor="duration" className="form-label">Runtime</label>
-          <input type="text" className="form-control" id="duration" name="duration" value={movieInfo.duration} onChange={handleChange} />
+          <input type="text" className="form-control" id="duration" name="duration" value={movieInfo.runtime} onChange={handleChange} />
         </div>
 
         <div className="col-12">

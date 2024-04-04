@@ -1,6 +1,12 @@
 import React from 'react';
 
-const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
+interface Props {
+    genres: string[];
+    selectedGenre: string;
+    onSelect: (genre: string) => void;
+}
+
+const GenreSelect: React.FC<Props> = ({ genres, selectedGenre, onSelect }) => {
   return (
     <div className="btn-group">
       {genres.map((genre) => (
