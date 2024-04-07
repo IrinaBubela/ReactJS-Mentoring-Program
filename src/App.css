@@ -112,7 +112,8 @@
 
 .edit-movie {
   position: relative;
-
+  display: flex;
+  flex-direction: column;
 }
 
 .edit-movie .btns{
@@ -133,4 +134,9 @@
   width: 90%;
   height: 90%;
   min-height: 250px;
+}
+
+.link-card {
+  text-decoration: none;
+  color: black;
 }
