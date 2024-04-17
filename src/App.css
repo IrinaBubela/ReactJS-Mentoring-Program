@@ -85,6 +85,12 @@
 
 .modal {
   display: block !important;
+  width: 70%;
+  height: 70%;
+}
+
+.modal-dialog {
+  background-color: white;
 }
 
 .form-actions {
@@ -98,16 +104,6 @@
 
 .btn-reset {
   margin-right: 12px;
-}
-
-.container-modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container-modal > .modal {
-  display: block !important;
 }
 
 .edit-movie {

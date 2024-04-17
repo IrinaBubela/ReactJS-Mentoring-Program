@@ -17,13 +17,13 @@ const Dialog: React.FC<PropsWithChildren<DialogProps>> = ({ title, onCloseDialog
         displayCheck: 'none'
       }
     }}>
-      <div className="modal" role="dialog" onClick={() => onCloseDialog()}>
+      <div className="modal" role="dialog" onClick={onCloseDialog}>
         <div className="modal-dialog" role="document" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">
             <div className="modal-header d-flex justify-content-between">
               <h5 className="modal-title">{title}</h5>
               <div className="text-end">
-                <button className="btn btn-secondary" type="button" onClick={() => onCloseDialog()}>X</button>
+                <button className="btn btn-secondary" type="button" onClick={onCloseDialog}>X</button>
               </div>
             </div>
             <div className="modal-body">{children}</div>

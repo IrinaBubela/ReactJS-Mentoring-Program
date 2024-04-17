@@ -4,9 +4,7 @@ import GenreSelect from './GenreSelect.tsx';
 import MovieTitle from './MovieTitle.tsx';
 import SortControl from './SortControl.tsx';
 import genres from '../genres.json';
-import Dialog from './Dialog.tsx';
-import MovieForm from './MovieForm.tsx';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 
 export interface Movie {
     title: string;
@@ -20,24 +18,25 @@ export interface Movie {
     revenue: number;
     runtime: number;
     genres: string[];
-    id: number;
+    id?: number;
 }
 
-export const initialMovieInfoObject: Movie = {
+export const emptyMovieForPost: Movie = {
     title: '',
-    tagline: '',
+    tagline: 'Here\'s to the fools who dream.',
     vote_average: 0,
     vote_count: 0,
-    release_date: '',
+    release_date: '2016-12-29',
     poster_path: '',
     overview: '',
-    budget: 0,
-    revenue: 0,
-    runtime: 0,
-    genres: [''],
-    id: 0,
+    budget: 102,
+    revenue: 102,
+    runtime: 102,
+    genres: [],
 };
 
+
+export const API_URL = 'http://localhost:4000/movies';
 
 const MovieListPage: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
@@ -45,12 +44,10 @@ const MovieListPage: React.FC = () => {
     const [selectedGenre, setSelectedGenre] = useState<string>('');
     const [currentSort, setCurrentSort] = useState<string>('releaseDate');
 
-    const [movieList, setMovieList] = useState<Movie[]>([]);
-
-    const [showEditDialog, setShowEditDialog] = useState<boolean>(false);
-    const [showAddDialog, setShowAddDialog] = useState<boolean>(false);
-    const [editDialogData, setEditDialogData] = useState<Movie | null>(null);
+    const [movieList, setMovieList] = useState<Movie[]>();
     const [searchParams, setSearchParams] = useSearchParams();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const fetchMovies = async () => {
         let isFetching = false;
@@ -68,7 +65,7 @@ const MovieListPage: React.FC = () => {
             if (searchBy) queryParams.set('searchBy', searchBy);
             queryParams.set('sortOrder', 'asc');
 
-            const response = await fetch(`http://localhost:4000/movies?${queryParams.toString()}`);
+            const response = await fetch(`${API_URL}?${queryParams.toString()}`);
             const data = await response.json();
             setMovieList(data.data);
         } catch (error) {
@@ -84,15 +81,21 @@ const MovieListPage: React.FC = () => {
         setSelectedGenre(searchParams.get('filter') || '');
         setSearchBy(searchParams.get('searchBy') || 'title');
         fetchMovies();
+
     }, [searchParams]);
 
     useEffect(() => {
+        console.log('location.pathname', location.pathname);
+        
         setSearchParams({ query: searchQuery, sortBy: currentSort, filter: selectedGenre, searchBy: searchBy });
     }, [searchQuery, currentSort, selectedGenre, searchBy]);
 
-    const addMovie = () => {
-        setShowAddDialog(true);
-    };
+    const redirectToAddMovie = () => {
+        navigate({
+            pathname: '/new',
+            search: '',
+        });
+    }
 
     const handleSearch = (query: string) => {
         setSearchQuery(query);
@@ -106,25 +109,11 @@ const MovieListPage: React.FC = () => {
         setSelectedGenre(genre);
     };
 
-    const onSubmitMovieForm = (form: Movie) => {
-        console.log(form, 'form');
-    };
-
-    const onCloseMovieEditForm = () => {
-        setShowEditDialog(false);
-    };
-
-    const onCloseMovieAddForm = () => {
-        setShowAddDialog(false);
-    };
-
     const editMovie = (movie: Movie) => {
-        setEditDialogData(movie);
-        setShowEditDialog(true);
-    };
-
-    const deleteMovie = (movie: Movie) => {
-        setMovieList(movieList.filter(movieObject => movieObject.title !== movie.title));
+        navigate({
+            pathname: `/${movie.id}/edit`,
+            search: '',
+        });
     };
 
     return (
@@ -143,9 +132,11 @@ const MovieListPage: React.FC = () => {
                         ))}
                 </div>
                 <div>
-                    <button className="btn btn-danger btn-outline mb-2" onClick={addMovie}>+ Add Movie</button>
+                    <button className="btn btn-danger btn-outline mb-2" onClick={redirectToAddMovie}>+ Add Movie</button>
                 </div>
-                <div><SearchForm initialQuery={''} onSearch={handleSearch} /></div>
+                <div>
+                    <SearchForm initialQuery={''} onSearch={handleSearch} />
+                </div>
                 <div className="control-section container">
                     <GenreSelect
                         genres={genres}
@@ -157,15 +148,15 @@ const MovieListPage: React.FC = () => {
                         onSortChange={handleSortChange}
                     />
                 </div>
+
                 <div className="movies-list container">
                     <div className="row row-cols-auto">
-                        {movieList
+                        {movieList && movieList
                             .filter(movie => !selectedGenre || movie.genres.includes(selectedGenre))
                             .map((movie, index) => (
                                 <div className="col edit-movie" key={index}>
                                     <div className="btns">
                                         <button className="btn btn-secondary edit-movie-btn" type="button" onClick={() => editMovie(movie)}>Edit movie</button>
-                                        <button className="btn btn-secondary delete-movie-btn" type="button" onClick={() => deleteMovie(movie)}>Delete movie</button>
                                     </div>
                                     <Link className="link-card" to={`/${movie.id}`}>
                                         <MovieTitle movie={movie} key={index} />
@@ -175,31 +166,6 @@ const MovieListPage: React.FC = () => {
                     </div>
                 </div>
             </div>
-
-            {
-                showAddDialog &&
-                <Dialog
-                    title="Add movie"
-                    onCloseDialog={onCloseMovieAddForm}
-                >
-                    <MovieForm
-                        onSubmit={onSubmitMovieForm}
-                        initialMovieInfo={initialMovieInfoObject}
-                    />
-                </Dialog>
-            }
-            {
-                showEditDialog &&
-                <Dialog
-                    title="Edit movie"
-                    onCloseDialog={onCloseMovieEditForm}
-                >
-                    <MovieForm
-                        onSubmit={onSubmitMovieForm}
-                        initialMovieInfo={editDialogData || initialMovieInfoObject}
-                    />
-                </Dialog>
-            }
         </div >
     )
 }
