@@ -1,5 +1,5 @@
 import React from 'react';
-import Dialog from '../components/Dialog';
+import Dialog from '../components/pages/Dialog';
 import './page.css'; 
 
 export default {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Movie, emptyMovieForPost } from './MovieListPage';
+import { Movie, emptyMovieForPost } from '.';
 import { Form, Field, ErrorMessage, Formik, FormikHelpers, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 interface MovieFormProps {

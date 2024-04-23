@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import SearchForm from './SearchForm';
+import SearchForm from '../pages/SearchForm';
 
 describe('SearchForm', () => {
   test('renders the search form correctly', () => {

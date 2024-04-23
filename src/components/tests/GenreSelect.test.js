@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import GenreSelect from './GenreSelect';
+import GenreSelect from '../pages/GenreSelect';
 import { act } from 'react-dom/test-utils';
 
 describe('GenreSelect Integration Test', () => {

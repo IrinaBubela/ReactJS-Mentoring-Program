@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Movie } from './MovieListPage';
+import { Movie } from '.';
 
 const MovieDetails: React.FC = () => {
   const { movieId } = useParams();

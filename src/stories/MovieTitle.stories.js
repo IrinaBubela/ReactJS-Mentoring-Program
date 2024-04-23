@@ -1,4 +1,4 @@
-import MovieTitle from '../components/MovieTitle';
+import MovieTitle from '../components/pages/MovieTitle';
 
 export default {
   title: 'Components/MovieTitle',

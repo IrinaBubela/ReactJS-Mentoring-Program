@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { API_URL, Movie } from './MovieListPage';
-import Dialog from './Dialog';
-import MovieForm from './MovieForm';
+import { API_URL, Movie } from '..';
+import Dialog from '../Dialog';
+import MovieForm from '../MovieForm';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditMovieForm: React.FC = () => {

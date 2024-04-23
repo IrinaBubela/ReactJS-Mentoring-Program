@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import MovieTitle from './MovieTitle';
+import MovieTitle from '../pages/MovieTitle';
 
 describe('MovieTitle', () => {
   test('renders movie title and details correctly', () => {

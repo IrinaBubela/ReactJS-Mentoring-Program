@@ -1,5 +1,5 @@
 import React from 'react';
-import { Movie } from './MovieListPage';
+import { Movie } from '.';
 
 interface Props {
     movie: Movie;

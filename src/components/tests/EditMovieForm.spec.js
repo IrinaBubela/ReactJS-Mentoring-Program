@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import EditMovieForm from './EditMovieForm';
+import EditMovieForm from '../pages/[movieId]/edit';
 
 // Mocking useParams and useNavigate
 jest.mock('react-router-dom', () => ({

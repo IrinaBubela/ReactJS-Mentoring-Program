@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SearchForm from './SearchForm.tsx';
 import GenreSelect from './GenreSelect.tsx';
 import MovieTitle from './MovieTitle.tsx';
 import SortControl from './SortControl.tsx';
-import genres from '../genres.json';
-import { Link, useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import genres from '../../genres.json';
+import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next/types/index';
 
 export interface Movie {
     title: string;
@@ -35,67 +36,18 @@ export const emptyMovieForPost: Movie = {
     genres: [],
 };
 
+interface AppProps {
+    movieList: Movie[]; 
+  }
 
-export const API_URL = 'http://localhost:4000/movies';
-
-const MovieListPage: React.FC = () => {
-    const [searchQuery, setSearchQuery] = useState<string>('');
-    const [searchBy, setSearchBy] = useState<string>('title');
-    const [selectedGenre, setSelectedGenre] = useState<string>('');
-    const [currentSort, setCurrentSort] = useState<string>('releaseDate');
-
-    const [movieList, setMovieList] = useState<Movie[]>();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const location = useLocation();
-    const navigate = useNavigate();
-
-    const fetchMovies = async () => {
-        let isFetching = false;
-        if (isFetching) {
-            return;
-        }
-
-        isFetching = true;
-
-        try {
-            const queryParams = new URLSearchParams();
-            if (searchQuery) queryParams.set('search', searchQuery);
-            if (currentSort) queryParams.set('sortBy', currentSort);
-            if (selectedGenre) queryParams.set('filter', selectedGenre);
-            if (searchBy) queryParams.set('searchBy', searchBy);
-            queryParams.set('sortOrder', 'asc');
-
-            const response = await fetch(`${API_URL}?${queryParams.toString()}`);
-            const data = await response.json();
-            setMovieList(data.data);
-        } catch (error) {
-            console.error('Error fetching movies:', error);
-        } finally {
-            isFetching = false;
-        }
-    };
-
-    useEffect(() => {
-        setSearchQuery(searchParams.get('query') || '');
-        setCurrentSort(searchParams.get('sortBy') || 'releaseDate');
-        setSelectedGenre(searchParams.get('filter') || '');
-        setSearchBy(searchParams.get('searchBy') || 'title');
-        fetchMovies();
-
-    }, [searchParams]);
-
-    useEffect(() => {
-        console.log('location.pathname', location.pathname);
-        
-        setSearchParams({ query: searchQuery, sortBy: currentSort, filter: selectedGenre, searchBy: searchBy });
-    }, [searchQuery, currentSort, selectedGenre, searchBy]);
-
-    const redirectToAddMovie = () => {
-        navigate({
-            pathname: '/new',
-            search: '',
-        });
-    }
+export const MovieListPage: React.FC<{movieList: Movie[]}> = ({ movieList }) => {
+    const [searchQuery, setSearchQuery] = React.useState<string>('');
+    const [searchBy, setSearchBy] = React.useState<string>('title');
+    const [selectedGenre, setSelectedGenre] = React.useState<string>('');
+    const [currentSort, setCurrentSort] = React.useState<string>('releaseDate');
+    const router = useRouter();
+    console.log('searchQuery', searchQuery);
+    
 
     const handleSearch = (query: string) => {
         setSearchQuery(query);
@@ -109,12 +61,14 @@ const MovieListPage: React.FC = () => {
         setSelectedGenre(genre);
     };
 
-    const editMovie = (movie: Movie) => {
-        navigate({
-            pathname: `/${movie.id}/edit`,
-            search: '',
-        });
+    const redirectToAddMovie = () => {
+        router.push('/new');
     };
+
+    const editMovie = (movie: Movie) => {
+        router.push(`/${movie.id}/edit`);
+    };
+
 
     return (
         <div className="App container">
@@ -158,9 +112,9 @@ const MovieListPage: React.FC = () => {
                                     <div className="btns">
                                         <button className="btn btn-secondary edit-movie-btn" type="button" onClick={() => editMovie(movie)}>Edit movie</button>
                                     </div>
-                                    <Link className="link-card" to={`/${movie.id}`}>
+                                    <a className="link-card" href={`/${movie.id}`}>
                                         <MovieTitle movie={movie} key={index} />
-                                    </Link>
+                                    </a>
                                 </div>
                             ))}
                     </div>
@@ -171,3 +125,21 @@ const MovieListPage: React.FC = () => {
 }
 
 export default MovieListPage;
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    try {
+      const API_URL = 'http://localhost:4000/movies';
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      const movieList = data.data;
+      return {
+        props: { movieList }
+      };
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      return {
+        props: { movieList: [] }
+      };
+    }
+  }

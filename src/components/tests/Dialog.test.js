@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Dialog from './Dialog';
+import Dialog from '../pages/Dialog';
 
 describe('Dialog', () => {
   test('renders dialog with title and close button', () => {

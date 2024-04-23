@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import MovieForm from './MovieForm';
+import MovieForm from '../pages/MovieForm';
 
 describe('MovieForm', () => {
   test('submits form successfully', async () => {

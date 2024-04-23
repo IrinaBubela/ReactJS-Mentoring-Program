@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import GenreSelect from '../components/GenreSelect';
+import GenreSelect from '../components/pages/GenreSelect';
 
 export default {
   title: 'GenreSelect',
