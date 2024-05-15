@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
+import { Outlet } from 'react-router-dom';
 
 interface Props {
     initialQuery: string;
@@ -45,6 +46,8 @@ const SearchForm: React.FC<Props> = ({ initialQuery, onSearch }) => {
                 </div>
                 </div>
             </form>
+            
+            <Outlet />
         </div>
     );
 };

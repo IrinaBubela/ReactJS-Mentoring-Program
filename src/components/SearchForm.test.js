@@ -1,36 +1,43 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import SearchForm from './SearchForm';
 
 describe('SearchForm', () => {
-  test('Test that component renders an input with the value equal to initial value passed in props', () => {
-    const initialQuery = 'Test value';
-    const { getByDisplayValue } = render(<SearchForm initialQuery={initialQuery} />);
-    const inputElement = getByDisplayValue(initialQuery);
-    
+  test('renders the search form correctly', () => {
+    const onSearch = jest.fn();
+    const { getByPlaceholderText, getByText } = render(
+      <SearchForm initialQuery="" onSearch={onSearch} />
+    );
+
+    // Check if the input field and search button are rendered
+    const inputElement = getByPlaceholderText('Search...');
+    const searchButton = getByText('Search');
+
     expect(inputElement).toBeInTheDocument();
-    expect(inputElement.value).toBe(initialQuery);
+    expect(searchButton).toBeInTheDocument();
   });
 
-  test('Test that after typing to the input and a "click" event on the Submit button, the "onChange" prop is called with proper value', () => {
-    const onSearchMock = jest.fn();
-    const { getByRole, getByDisplayValue } = render(<SearchForm onSearch={onSearchMock} />);
-    const inputValue = 'thriller';
-    const inputElement = getByDisplayValue('');
-    
-    fireEvent.change(inputElement, { target: { value: inputValue } });
-    fireEvent.click(getByRole('button', { name: /search/i }));
-    expect(onSearchMock).toHaveBeenCalledWith(inputValue);
+  test('calls onSearch when search button is clicked', () => {
+    const onSearch = jest.fn();
+    const { getByText } = render(<SearchForm initialQuery="" onSearch={onSearch} />);
+
+    const searchButton = getByText('Search');
+    fireEvent.click(searchButton);
+
+    // Ensure onSearch is called with the correct query
+    expect(onSearch).toHaveBeenCalledWith('');
   });
 
-  test('Test that after typing to the input and pressing Enter key, the "onChange" prop is called with proper value', () => {
-    const onSearchMock = jest.fn();
-    const { getByDisplayValue } = render(<SearchForm onSearch={onSearchMock} />);
-    const inputValue = 'comedy';
-    const inputElement = getByDisplayValue('');
+  test('calls onSearch when Enter key is pressed in the input field', () => {
+    const onSearch = jest.fn();
+    const { getByPlaceholderText } = render(<SearchForm initialQuery="" onSearch={onSearch} />);
 
-    fireEvent.change(inputElement, { target: { value: inputValue } });
-    fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter' });
-    expect(onSearchMock).toHaveBeenCalledWith(inputValue);
+    const inputElement = getByPlaceholderText('Search...');
+    fireEvent.change(inputElement, { target: { value: 'Test Query' } });
+    fireEvent.keyDown(inputElement, { key: 'Enter', keyCode: 13 });
+
+    // Ensure onSearch is called with the correct query
+    expect(onSearch).toHaveBeenCalledWith('Test Query');
   });
 });

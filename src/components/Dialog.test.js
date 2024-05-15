@@ -1,21 +1,26 @@
-import { fireEvent, render } from '@testing-library/react';
-import Dialog from './Dialog.tsx'; 
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Dialog from './Dialog';
 
-describe('Dialog Component', () => {
+describe('Dialog', () => {
+  test('renders dialog with title and close button', () => {
+    const handleCloseDialog = jest.fn();
 
-  it('renders dialog with title and close button', () => {
-    const onCloseDialog = jest.fn();
-    const { getByText } = render(
-      
-      <Dialog title="Dialog Title" onCloseDialog={onCloseDialog}>
-        <div>Dialog Child</div>
+    const { getByText, queryByText } = render(
+      <Dialog title="Test Dialog" onCloseDialog={handleCloseDialog}>
+        <p>Dialog content</p>
       </Dialog>
     );
 
-    expect(getByText('Dialog Title')).toBeInTheDocument();
-    expect(getByText('Dialog Child')).toBeInTheDocument();
+    expect(getByText('Test Dialog')).toBeInTheDocument();
+    expect(getByText('Dialog content')).toBeInTheDocument();
 
-    fireEvent.click(getByText('X')); 
-    expect(onCloseDialog).toHaveBeenCalled();
+    const closeButton = getByText('X');
+    expect(closeButton).toBeInTheDocument();
+
+    fireEvent.click(closeButton);
+    
+    expect(handleCloseDialog).toHaveBeenCalledTimes(1);
   });
 });

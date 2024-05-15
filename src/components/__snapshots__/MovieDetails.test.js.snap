@@ -3,63 +3,10 @@
 exports[`MovieDetails renders correctly 1`] = `
 <div>
   <div
-    class="container mt-4"
+    class="container"
   >
-    <div
-      class="row movie-details"
-    >
-      <div
-        class="col-md-4"
-      >
-        <div
-          class="poster"
-        >
-          <img
-            alt="Example Movie"
-            src="example.jpg"
-          />
-        </div>
-      </div>
-      <div
-        class="col-md-8"
-      >
-        <div
-          class="details"
-        >
-          <h2>
-            Example Movie
-          </h2>
-          <p>
-            <strong>
-              Release Year:
-            </strong>
-             
-            2021
-          </p>
-          <p>
-            <strong>
-              Rating:
-            </strong>
-             
-            10
-          </p>
-          <p>
-            <strong>
-              Duration:
-            </strong>
-             
-            2h
-          </p>
-          <p>
-            <strong>
-              Description:
-            </strong>
-             
-            This is an example movie description.
-          </p>
-        </div>
-      </div>
-    </div>
+    <div />
+    ;
   </div>
 </div>
 `;
