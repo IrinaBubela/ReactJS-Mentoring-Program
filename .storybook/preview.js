@@ -1,4 +1,4 @@
-/** @type { import('@storybook/react').Preview } */
+npm run /** @type { import('@storybook/react').Preview } */
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },

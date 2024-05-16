@@ -2,13 +2,17 @@
   "name": "react-mentoring",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/babel__traverse": "^7.20.5",
     "bootstrap": "^5.3.3",
     "eslint-plugin-react-hooks": "^4.6.0",
     "focus-trap-react": "^10.2.3",
     "formik": "^2.4.5",
+    "next": "^14.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
@@ -19,10 +23,10 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!my-library-dir)/'",
-    "dev": "vite --host",
     "eject": "react-scripts eject",
     "wdio": "wdio run ./wdio.conf.js",
     "storybook": "storybook dev -p 6006",
@@ -49,6 +53,7 @@
   },
   "main": "dist/index",
   "types": "dist/index",
+  "type": "module",
   "devDependencies": {
     "@babel/register": "^7.23.7",
     "@chromatic-com/storybook": "^1.2.22",
@@ -71,11 +76,16 @@
     "@wdio/local-runner": "^8.32.3",
     "@wdio/spec-reporter": "^8.32.2",
     "cypress": "^13.7.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-next": "^0.0.0",
     "eslint-plugin-storybook": "^0.8.0",
     "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.17",
-    "typescript": "^3.9.10",
-    "webpack": "^5.90.3"
+    "typescript": "^4.5.2",
+    "vite": "^5.2.10",
+    "webpack": "^5.91.0"
   }
 }
